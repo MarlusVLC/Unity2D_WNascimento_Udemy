@@ -10,6 +10,7 @@ TagManager:
   - floor
   - projectile
   - coin
+  - ground
   layers:
   - Default
   - TransparentFX
@@ -19,12 +20,12 @@ TagManager:
   - UI
   - 
   - 
-  - Debris0
-  - Debris1
+  - Bullet
+  - Veiculo
   - Debris2
   - Debris3
   - Debris4
-  - 
+  - ground
   - 
   - 
   - 

@@ -1,0 +1,16 @@
+DistanceJoint2D; Manutenção de distância
+FixedJoint2D: Superfícies pendulares/frageis e pontes
+FrictionJoint2D: Objetos Passíveis de serem movidos, tanto linear quanto circularmente
+HingeJoint2D: Correntes/Cordas e Dobradiças/Portas e Pendulos
+RelativeJoint2D: Manutenção de Distância e ângulo / Ligação de Objetos
+SliderJoint2D: Movimento de deslize/Oscilação
+SpringJoint2D: Mola e elástico
+TargetJoint2D: Mola baseada em força
+WheelJoint2D: Rodas, dã
+
+
+AreaEffector2D: Efeito de "boost" em área.
+BuoyancyEffector2D: Efeito de flutuar/boia.
+PointEffector2D: Efeito de explosão / atração planetária ou magnética
+PlatformEffector2D: Plataformas com colisões de uma direção; Controle de atrito e "kikagem"; Plataforma estilo Mario
+SurfaceEffector2D: Efeitos na superfície - Escorregadio, trilho de trem, montanha-russa, boost no chão.

@@ -13,10 +13,10 @@ public class nuScript : MonoBehaviour
      * 
      * 
      */
-    int numLives = 1484646;
-    int numCoins = 10;
-    string name = "morlon";
-    float energy = 1.78f;
+    // int numLives = 1484646;
+    // int numCoins = 10;
+    // string name = "morlon";
+    // float energy = 1.78f;
     //int[] nums = { 1, 2, 8888, 4 };
     //int[] nums = new int[4] { 0, 8, 9, 88 };
     //double[] nums = new double[4];

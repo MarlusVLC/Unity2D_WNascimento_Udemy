@@ -19,14 +19,8 @@ public class transformations : MonoBehaviour
     [SerializeField] bool scale;
     [SerializeField] float scaleX, scaleY, scaleZ;
 
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (translate == true)
         {
@@ -40,7 +34,7 @@ public class transformations : MonoBehaviour
 
         if (rotateLocal == true)
         {
-            transform.Rotate(new Vector3(rotateX, rotateY, rotateZ), Space.World);
+            transform.Rotate(new Vector3(rotateX, rotateY, rotateZ) , Space.World);
         }
 
         if (rotateAround == true)
