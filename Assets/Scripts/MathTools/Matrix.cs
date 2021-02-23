@@ -128,13 +128,147 @@ namespace MathTools
                 Inside[i, columnIndex] = enuple[i];
             }
         }
+
+        public Matrix GetRowMatrix(int rowIndex)
+        {
+            float[,] row = new float[1, Inside.GetLength(1)];
+            for (int j = 0; j < Inside.GetLength(1); j++)
+            {
+                row[0, j] = Inside[rowIndex, j];
+            }
+            
+            return new Matrix(row);
+        }
         
-        
-        //public Matrix GetRowMatrix
-        //public Matrix GetColumnMatrix
-        //public SetRow
-        //public SetColumn
-        
+        public Matrix GetColumnMatrix(int columnIndex)
+        {
+            float[,] column = new float[Inside.GetLength(0),1];
+            for (int i = 0; i < Inside.GetLength(0); i++)
+            {
+                column[i, 0] = Inside[i, columnIndex];
+            }
+            return new Matrix(column);
+        }
+
+
+        public Matrix GetMinorMatrix(int row, int column)
+        {
+            float[,] minor = new float[Inside.GetLength(0)-1, Inside.GetLength(1)-1];
+            int minorRow = 0;
+            for (int i = 0; i < Inside.GetLength(0); i++)
+            {
+                if (i != row)
+                {
+                    int minorColumn = 0;
+                    for (int j = 0; j < Inside.GetLength(1); j++)
+                    {
+                        if (j != column)
+                        {
+                            minor[minorRow, minorColumn] = Inside[i, j];
+                            minorColumn++;
+                        }
+                    }
+
+                    minorRow++;
+                }
+            }
+
+            return new Matrix(minor);
+        }
+
+        public float Determinant()
+        {
+            if (Inside.GetLength(0) != Inside.GetLength(1))
+                throw (new InequalMatricesException("Only square matrices have determinants"));
+            if (Inside.Length == 2)
+                return Inside[0, 0] * Inside[1, 1] - Inside[0, 1] * Inside[1, 0];
+            else if (Inside.Length == 1)
+            {
+                return Inside[0, 0];
+            }
+            else
+            {
+                float determinant = 0;
+                for (int i = 0; i < Inside.GetLength(1); i++)
+                {
+                    int cofSign = i % 2 == 0 ? 1 : -1;
+                    determinant += cofSign * Inside[0, i] * GetMinorMatrix(0,i).Determinant();
+                }
+
+                return determinant;
+            }
+        }
+
+        public Matrix MinorsMatrix()
+        {
+            float[,] minorsMatrix = new float[Inside.GetLength(0), Inside.GetLength(1)];
+            for (int i = 0; i < Inside.GetLength(0); i++)
+            {
+                for (int j = 0; j < Inside.GetLength(1); j++)
+                {
+                    minorsMatrix[i, j] = GetMinorMatrix(i, j).Determinant();
+                }
+            }
+
+            return new Matrix(minorsMatrix);
+        }
+
+        public Matrix CofactorMatrix()
+        {
+            float[,] cofMatrix = new float[Inside.GetLength(0), Inside.GetLength(1)];
+            int cofSign = 1;
+            for (int i = 0; i < Inside.GetLength(0); i++)
+            {
+                for (int j = 0; j < Inside.GetLength(1); j++)
+                {
+                    cofSign = (i + j) % 2 == 0 ? 1 : -1;
+                    cofMatrix[i, j] = cofSign * GetMinorMatrix(i, j).Determinant();
+                }
+            }
+
+            return new Matrix(cofMatrix);
+        }
+
+        public Matrix TransposeMatrix()
+        {
+            float[,] transMatrix = new float[Inside.GetLength(0), Inside.GetLength(1)];
+            for (int i = 0; i < Inside.GetLength(0); i++)
+            {
+                for (int j = 0; j < Inside.GetLength(1); j++)
+                {
+                    transMatrix[i, j] = Inside[j, i];
+                }
+            }
+
+            return new Matrix(transMatrix);
+        }
+
+        public Matrix AdjointMatrix()
+        {
+            float[,] adjMatrix = new float[Inside.GetLength(0), Inside.GetLength(1)];
+            int cofSign = 1;
+            for (int i = 0; i < Inside.GetLength(0); i++)
+            {
+                for (int j = 0; j < Inside.GetLength(1); j++)
+                {
+                    cofSign = (i + j) % 2 == 0 ? 1 : -1;
+                    adjMatrix[j, i] = cofSign * GetMinorMatrix(i, j).Determinant();
+                }
+            }
+            return new Matrix(adjMatrix);
+        }
+
+        public bool IsSingular()
+        {
+            return Determinant() == 0;
+        }
+
+        public Matrix InverseMatrix()
+        {
+            if (IsSingular())
+                throw new InequalMatricesException("The matrix must have a determinant different than zero");
+            return (1 / Determinant()) * AdjointMatrix();
+        }
         
     
         public void Print()

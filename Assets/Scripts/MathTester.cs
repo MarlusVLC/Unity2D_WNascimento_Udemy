@@ -14,6 +14,7 @@ namespace DefaultNamespace
     {
         [SerializeField] private Matrix matrix1;
         [SerializeField] private Matrix matrix2;
+        [SerializeField] private Matrix matrix3;
         [SerializeField] private Matrix resultMatrix;
         [SerializeField] private Matrix irregularMatrix;
         [SerializeField] private Vector2 testVector2;
@@ -38,8 +39,9 @@ namespace DefaultNamespace
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
             
-            matrix1 = new Matrix(new float[2,2] {{1,1},{1,1}});
-            matrix2 = new Matrix(new float[2, 2] {{2, 4}, {4, 3}});
+            matrix1 = new Matrix(new float[2,2] {{1,2},{1,-4}});
+            matrix2 = new Matrix(new float[3, 3] {{2, 4, 5}, {4, 3, 9}, {9, 9, 9}});
+            matrix3 = new Matrix(new float[4, 4] {{1,2,3,4}, {2,-3,4,5}, {3,4,5,6}, {4,5,-6,7}});
             irregularMatrix = new Matrix(new float[1, 2] {{1, 2}});
 
             _point = Vector3.zero;
@@ -51,34 +53,46 @@ namespace DefaultNamespace
                 new Vector2(-1, -1),
                 new Vector2(1,-1)
             };
+
+
+            // float[,] array0 = new float[3, 3];
+            // float[] subArray0 = new float[3] {0, 0, 0};
+            // // array0[1] = subArray0;
+            // array0.SetValue(subArray0, 1);
         }
 
         private void Start()
         {
-            
+
         }
 
         private void Update()
         {
+
+            
+            
+            
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
-                    // _matrixOperator.printMatrix(_matrixOperator.NullMatrix(5));
+                    matrix1.Print();
+                    Debug.Log(matrix1.IsSingular());
+                    matrix1.InverseMatrix().Print();
+                    (matrix1 * matrix1.InverseMatrix()).Print();
                     
-                    // resultMatrix = _matrixOperator.Sum(matrix1, matrix2);
-                    // _matrixOperator.printMatrix(resultMatrix);
-                    // resultMatrix = matrix1 + matrix2;
-                    // resultMatrix -= matrix2;
-                    // resultMatrix.Print();
-                    // Matrix.Null(5).Print();
-                    // Matrix.Identity(5).Print();
-                    // matrix1++;
-                    // matrix1.Print();
-                    // (2 * matrix1).Print();
-                    // matrix2.SetColumn(irregularMatrix.GetRow(0),1);
-                    // matrix2.Print();
-                    (matrix1 * matrix2).Print();
+                    matrix2.Print();
+                    Debug.Log(matrix2.IsSingular());
+                    matrix2.InverseMatrix().Print();
+                    (matrix2 * matrix2.InverseMatrix()).Print();
+                    
+                    matrix3.Print();
+                    Debug.Log(matrix3.IsSingular());
+                    matrix3.InverseMatrix().Print();
+                    (matrix3 * matrix3.InverseMatrix()).Print();
+
+                    (matrix1 + matrix1 + matrix1).Print();
+
                 }
 
                 else if (Input.GetKeyDown(KeyCode.T))
@@ -94,7 +108,9 @@ namespace DefaultNamespace
                     
                     // _point.STranslate(tX,tY,tZ);
 
-                    VectorOperator.PTranslate(_squareVertices, tX, tY);
+                    // VectorOperator.PTranslate(_squareVertices, tX, tY);
+                    _point = _point.STranslate(tX, tY, tZ);
+
                 }
 
                 else if (Input.GetKeyDown(KeyCode.S))
@@ -108,9 +124,9 @@ namespace DefaultNamespace
                     //     _polygonVertices[i] = _polygonVertices[i].CScale(sX, sY);
                     // }
 
-                    VectorOperator.PScale(_squareVertices, tX, tY);
+                    VectorOperator.PScale(_squareVertices, sX, sY);
                 }
-                else if (Input.GetKeyDown(KeyCode.R))
+                else if (Input.GetKey(KeyCode.R))
                 {
                     // transform.position = _vector2Operator.RotateVector2(transform.position, theta);
                     // transform.position = transform.position.CRotate(theta);
@@ -132,23 +148,30 @@ namespace DefaultNamespace
             {
                 // Gizmos.color = Color.red;
                 // Gizmos.DrawSphere(_point, gizmoRadius);
-                drawGizmoSquare(_squareVertices, Color.red, gizmoRadius);
+                DrawGizmoSquare(_squareVertices, Color.red, gizmoRadius);
             }
         }
 
 
-        public void drawGizmoSquare(Vector2[] _polygonVertices, Color color, float iconRadius)
+        public void DrawGizmoSquare(Vector2[] _polygonVertices, Color color, float iconRadius)
         {
             Gizmos.color = color;
-            Gizmos.DrawSphere(_polygonVertices[0], iconRadius);
-            Gizmos.DrawSphere(_polygonVertices[1], iconRadius);
-            Gizmos.DrawSphere(_polygonVertices[2], iconRadius);
-            Gizmos.DrawSphere(_polygonVertices[3], iconRadius);
-            Gizmos.DrawLine(_polygonVertices[0],_polygonVertices[1]);
-            Gizmos.DrawLine(_polygonVertices[1],_polygonVertices[2]);
-            Gizmos.DrawLine(_polygonVertices[2],_polygonVertices[3]);
-            Gizmos.DrawLine(_polygonVertices[3],_polygonVertices[0]);
-        }
+            Gizmos.DrawSphere(new Vector2(_point.x+_polygonVertices[0].x, _point.y+_polygonVertices[0].y), iconRadius);
+            Gizmos.DrawSphere(new Vector2(_point.x+_polygonVertices[1].x, _point.y+_polygonVertices[1].y), iconRadius);
+            Gizmos.DrawSphere(new Vector2(_point.x+_polygonVertices[2].x, _point.y+_polygonVertices[2].y), iconRadius);
+            Gizmos.DrawSphere(new Vector2(_point.x+_polygonVertices[3].x, _point.y+_polygonVertices[3].y), iconRadius);
+            
+            Gizmos.DrawLine(new Vector2(_point.x+_polygonVertices[0].x, _point.y+_polygonVertices[0].y),
+                new Vector2(_point.x+_polygonVertices[1].x, _point.y+_polygonVertices[1].y));
+            
+            Gizmos.DrawLine(new Vector2(_point.x+_polygonVertices[1].x, _point.y+_polygonVertices[1].y),
+                new Vector2(_point.x+_polygonVertices[2].x, _point.y+_polygonVertices[2].y));
+            
+            Gizmos.DrawLine(new Vector2(_point.x+_polygonVertices[2].x, _point.y+_polygonVertices[2].y),
+                new Vector2(_point.x+_polygonVertices[3].x, _point.y+_polygonVertices[3].y));
+            
+            Gizmos.DrawLine(new Vector2(_point.x+_polygonVertices[3].x, _point.y+_polygonVertices[3].y),
+                new Vector2(_point.x+_polygonVertices[0].x, _point.y+_polygonVertices[0].y));        }
         
         // public void drawGizmoCube(Vector3[] vertices, Color color, float iconRadius)
         // {
