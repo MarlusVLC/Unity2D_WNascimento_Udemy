@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework.Constraints;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class HeroMove : MonoBehaviour
 {
@@ -12,7 +13,12 @@ public class HeroMove : MonoBehaviour
     // [SerializeField] private float boostTimeLimit = 1.0f;
 
     private bool _isFacingRight = true;
+    
     private bool _canJump = false;
+    [SerializeField] private Transform _feet;
+    [SerializeField] private LayerMask _whatIsFloor;
+    [SerializeField] private float contactRadius = 0.2f;
+    
     private bool _isAlive = true;
     private bool _isRunning = false;
     private bool _isShooting = false;
@@ -33,15 +39,12 @@ public class HeroMove : MonoBehaviour
 
     void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.RightArrow) && !_isFacingRight)
-        //     Flip();
-        // else if (Input.GetKeyDown(KeyCode.LeftArrow) && _isFacingRight)
-        // {
-        //     Flip();
-        // }
 
         if (_isAlive)
         {
+            //É CHÃO
+            _canJump = Physics2D.OverlapCircle(_feet.position, contactRadius, _whatIsFloor);
+            
             _direction = Input.GetAxisRaw("Horizontal");
             
             //Flip sprite
@@ -123,15 +126,10 @@ public class HeroMove : MonoBehaviour
             _anim.SetBool("isDying", !_isAlive);
         }
         else if (other.gameObject.CompareTag("floor"))
-            _canJump = true;
-        SetAnimParameter_Y("None");
-    }
+            SetAnimParameter_Y("None");
 
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("floor"))
-            _canJump = false;
     }
+    
 
     void SetAnimParameter_X(string parameter)
     {
