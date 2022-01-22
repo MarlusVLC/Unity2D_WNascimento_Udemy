@@ -12,31 +12,11 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace MathTools
 {
-	public class MatrixOperator
+	public static class MatrixOperator
 	{
-		//SINGLETON begin
-
-		private static MatrixOperator INSTANCE;
-
-		public static MatrixOperator getInstance()
-		{
-			if (INSTANCE == null)
-			{
-				INSTANCE = new MatrixOperator();
-			}
-
-			return INSTANCE;
-		}
-
-		// SINGLETON end
-
-		public MatrixOperator()
-		{
-		}
 
 
-
-		public float[,] Sum(float[,] matrix1, float[,] matrix2)
+		public static float[,] Sum(float[,] matrix1, float[,] matrix2)
 		{
 			if (matrix1.GetLength(0) != matrix2.GetLength(0) ||
 			    matrix1.GetLength(1) != matrix2.GetLength(1))
@@ -79,7 +59,7 @@ namespace MathTools
 		//  }
 		// }
 
-		public float[,] Subtract(float[,] matrix1, float[,] matrix2)
+		public static float[,] Subtract(float[,] matrix1, float[,] matrix2)
 		{
 			if (matrix1.GetLength(0) != matrix2.GetLength(0) ||
 			    matrix1.GetLength(1) != matrix2.GetLength(1))
@@ -102,7 +82,7 @@ namespace MathTools
 		}
 
 
-		public float[,] ScalarProduct(float[,] matrix, float scalar)
+		public static float[,] ScalarProduct(float[,] matrix, float scalar)
 		{
 			for (int i = 0; i < matrix.GetLength(0); i++)
 			{
@@ -120,7 +100,7 @@ namespace MathTools
 		// float[,] matrix0 = new float[2, 2] { { 0, 1 }, { 2, 3 } };
 		// float[,] matrix1 = new float[2, 2] { { 0, 1 }, { 2, 3 } };
 
-		public float[] getRow(int i, float[,] matrix)
+		public static float[] getRow(int i, float[,] matrix)
 		{
 			float[] row = new float[matrix.GetLength(1)];
 			for (int j = 0; j < matrix.GetLength(1); j++)
@@ -134,7 +114,7 @@ namespace MathTools
 		/// <summary>
 		/// <para> Deprecated method. Prefer to use and edit Matrix.cs method instead</para>
 		/// </summary>
-		public float[] getColumn(int j, float[,] matrix)
+		public static float[] getColumn(int j, float[,] matrix)
 		{
 			float[] column = new float[matrix.GetLength(0)];
 			for (int i = 0; i < matrix.GetLength(0); i++)
@@ -146,7 +126,7 @@ namespace MathTools
 		}
 
 
-		public float DotProduct(float[] tuple1, float[] tuple2)
+		public static float DotProduct(float[] tuple1, float[] tuple2)
 		{
 			if (tuple1.Length != tuple2.Length)
 				throw (new InequalMatricesException("tuples should have same length"));
@@ -162,7 +142,7 @@ namespace MathTools
 		}
 
 
-		public float[,] CrossProduct(float[,] matrix1, float[,] matrix2)
+		public static float[,] CrossProduct(float[,] matrix1, float[,] matrix2)
 		{
 			if (matrix1.GetLength(1) != matrix2.GetLength(0))
 				throw (new InequalMatricesException("matrix1's length should be equal to matrix2's height"));

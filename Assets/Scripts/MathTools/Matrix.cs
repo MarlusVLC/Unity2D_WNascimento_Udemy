@@ -20,19 +20,19 @@ namespace MathTools
         
 
         public static Matrix operator +(Matrix a, Matrix b)
-            => new Matrix(MatrixOperator.getInstance().Sum(a.Inside, b.Inside));
+            => new Matrix(MatrixOperator.Sum(a.Inside, b.Inside));
 
         public static Matrix operator -(Matrix a, Matrix b)
-            => new Matrix(MatrixOperator.getInstance().Subtract(a.Inside, b.Inside));
+            => new Matrix(MatrixOperator.Subtract(a.Inside, b.Inside));
 
         public static Matrix operator *(Matrix a, float b)
-            => new Matrix(MatrixOperator.getInstance().ScalarProduct(a.Inside, b));
+            => new Matrix(MatrixOperator.ScalarProduct(a.Inside, b));
         
         public static Matrix operator *(float b, Matrix a)
-            => new Matrix(MatrixOperator.getInstance().ScalarProduct(a.Inside, b));
+            => new Matrix(MatrixOperator.ScalarProduct(a.Inside, b));
         
         public static Matrix operator *(Matrix a, Matrix b)
-            => new Matrix(MatrixOperator.getInstance().CrossProduct(a.Inside, b.Inside));
+            => new Matrix(MatrixOperator.CrossProduct(a.Inside, b.Inside));
         
         //public dotProduct
         
@@ -271,18 +271,19 @@ namespace MathTools
         }
         
     
-        public void Print()
+        public override string ToString()
         {
             String message = "\n";
             for (int i = 0; i < Inside.GetLength(0); i++)
             {
                 for (int j = 0; j < Inside.GetLength(1); j++)
                 {
-                    message += Inside[i,j].ToString() + " ";
+                    message += Inside[i,j] + " ";
                 }
                 message += "\n";
             }
-            Debug.Log(message);
+
+            return message;
         }
 
         public int Heigth => _height;

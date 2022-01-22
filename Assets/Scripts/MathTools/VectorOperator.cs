@@ -21,7 +21,7 @@ namespace MathTools
                 {0, 1, 0},
                 {tX, tY, 1}
             };
-            float[,] newVector2Matrix = MatrixOperator.getInstance().CrossProduct(vector2Matrix, transformationMatrix);
+            float[,] newVector2Matrix = MatrixOperator.CrossProduct(vector2Matrix, transformationMatrix);
             return new Vector2(newVector2Matrix[0, 0], newVector2Matrix[0, 1]);
         }
         
@@ -43,7 +43,7 @@ namespace MathTools
                 {0, 0, 1, 0},
                 {tX, tY, tZ, 1}
             };
-            float[,] newVector3Matrix = MatrixOperator.getInstance().CrossProduct(vector2Matrix, transformationMatrix);
+            float[,] newVector3Matrix = MatrixOperator.CrossProduct(vector2Matrix, transformationMatrix);
             return new Vector3(newVector3Matrix[0, 0], newVector3Matrix[0, 1], newVector3Matrix[0,2]);
         }
 
@@ -72,7 +72,7 @@ namespace MathTools
                 {0, sY, 0},
                 {0,  0, 1}
             };
-            float[,] newVector2Matrix = MatrixOperator.getInstance().CrossProduct(vector2Matrix, transformationMatrix);
+            float[,] newVector2Matrix = MatrixOperator.CrossProduct(vector2Matrix, transformationMatrix);
             return new Vector2(newVector2Matrix[0, 0], newVector2Matrix[0, 1]);
         }
                 
@@ -86,7 +86,7 @@ namespace MathTools
                 {0, 0, sZ, 0},
                 {0, 0, 0,  1}
             };
-            float[,] newVector3Matrix = MatrixOperator.getInstance().CrossProduct(vector2Matrix, transformationMatrix);
+            float[,] newVector3Matrix = MatrixOperator.CrossProduct(vector2Matrix, transformationMatrix);
             return new Vector3(newVector3Matrix[0, 0], newVector3Matrix[0, 1], newVector3Matrix[0,2]);
         }
         
@@ -116,7 +116,7 @@ namespace MathTools
                 {-Mathf.Sin(theta), Mathf.Cos(theta), 0},
                 {0               ,  0                ,1}
             };
-            float[,] newVector2Matrix = MatrixOperator.getInstance().CrossProduct(vector2Matrix, transformationMatrix);
+            float[,] newVector2Matrix = MatrixOperator.CrossProduct(vector2Matrix, transformationMatrix);
             return new Vector2(newVector2Matrix[0, 0], newVector2Matrix[0, 1]);
         }
         
@@ -131,11 +131,11 @@ namespace MathTools
                 {0               , 0                , 1, 0},
                 {0               , 0                , 0, 0}
             };
-            float[,] newVector3Matrix = MatrixOperator.getInstance().CrossProduct(vector2Matrix, transformationMatrix);
+            float[,] newVector3Matrix = MatrixOperator.CrossProduct(vector2Matrix, transformationMatrix);
             return new Vector3(newVector3Matrix[0, 0], newVector3Matrix[0, 1], newVector3Matrix[0,2]);
         } 
         
-        public static void PRotate(in Vector2[] _polygonVertices, float theta)
+        public static void PRotate(ref Vector2[] _polygonVertices, float theta)
         {
             for (int i = 0; i < _polygonVertices.Length; i++)
             {
