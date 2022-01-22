@@ -103,10 +103,10 @@ public class Car : Vehicle
     }
 
 
-    public void goTo(string destination)
-    {
-        Debug.Log("Getting rom" + destination);
-    }
+    // public void goTo(string destination)
+    // {
+    //     Debug.Log("Getting rom" + destination);
+    // }
 }
 
 

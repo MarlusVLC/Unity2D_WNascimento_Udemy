@@ -29,6 +29,10 @@ namespace DefaultNamespace
         [SerializeField] private float gizmoRadius;
 
 
+        [SerializeField] private myVector newVectorA;
+        [SerializeField] private myVector newVectorB;
+
+        
         private Vector3 _point;
         private Vector2[] _squareVertices;
         
@@ -59,6 +63,10 @@ namespace DefaultNamespace
             // float[] subArray0 = new float[3] {0, 0, 0};
             // // array0[1] = subArray0;
             // array0.SetValue(subArray0, 1);
+
+            newVectorA = new myVector(new float[3] {1,1,1});
+            newVectorB = new myVector(new float[3] {2,2,2});
+
         }
 
         private void Start()
@@ -76,22 +84,27 @@ namespace DefaultNamespace
             {
                 if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
-                    matrix1.Print();
-                    Debug.Log(matrix1.IsSingular());
-                    matrix1.InverseMatrix().Print();
-                    (matrix1 * matrix1.InverseMatrix()).Print();
-                    
-                    matrix2.Print();
-                    Debug.Log(matrix2.IsSingular());
-                    matrix2.InverseMatrix().Print();
-                    (matrix2 * matrix2.InverseMatrix()).Print();
-                    
-                    matrix3.Print();
-                    Debug.Log(matrix3.IsSingular());
-                    matrix3.InverseMatrix().Print();
-                    (matrix3 * matrix3.InverseMatrix()).Print();
-
-                    (matrix1 + matrix1 + matrix1).Print();
+                    // matrix1.Print();
+                    // Debug.Log(matrix1.IsSingular());
+                    // matrix1.InverseMatrix().Print();
+                    // (matrix1 * matrix1.InverseMatrix()).Print();
+                    //
+                    // matrix2.Print();
+                    // Debug.Log(matrix2.IsSingular());
+                    // matrix2.InverseMatrix().Print();
+                    // (matrix2 * matrix2.InverseMatrix()).Print();
+                    //
+                    // matrix3.Print();
+                    // Debug.Log(matrix3.IsSingular());
+                    // matrix3.InverseMatrix().Print();
+                    // (matrix3 * matrix3.InverseMatrix()).Print();
+                    //
+                    // (matrix1 + matrix1 + matrix1).Print();
+                    (newVectorA + newVectorB).Print();
+                    print(newVectorA.Magnitude());
+                    newVectorA.Normalize();
+                    newVectorA.Print();
+                    print(newVectorA.Magnitude());
 
                 }
 
@@ -136,7 +149,7 @@ namespace DefaultNamespace
                     //     _polygonVertices[i] = _polygonVertices[i].CRotate(theta);
                     // }
 
-                    VectorOperator.PRotate(_squareVertices, theta);
+                    VectorOperator.PRotate(ref _squareVertices, theta);
                 }
 
             }
