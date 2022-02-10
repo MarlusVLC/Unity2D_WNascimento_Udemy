@@ -23,12 +23,12 @@ public class MainMovement : MonoBehaviour
     [SerializeField] private float deathHeight = -10; //TALVEZ TENHA QUE MUDAR DEPOIS
     [SerializeField] private float DEFAULT_coyoteTime;
     [SerializeField] private float DEFAULT_jumpBuffer;
-    [SerializeField] private float hDampingBasic;
-    [SerializeField] private float hDampingStop;
-    [SerializeField] private float hDampingTurn;
-    [SerializeField] private float jumpHDampingBasic;
-    [SerializeField] private float jumpHDampingStop;
-    [SerializeField] private float jumpHDampingTurn;
+    [Range(0,1)][SerializeField] private float hDampingBasic;
+    [Range(0,1)][SerializeField] private float hDampingStop;
+    [Range(0,1)][SerializeField] private float hDampingTurn;
+    [Range(0,1)][SerializeField] private float jumpHDampingBasic;
+    [Range(0,1)][SerializeField] private float jumpHDampingStop;
+    [Range(0,1)][SerializeField] private float jumpHDampingTurn;
     [SerializeField] private float jumpCut;
     [SerializeField] private float freeFallForce;
     [SerializeField] private AudioClip jumpSfx;
@@ -44,10 +44,23 @@ public class MainMovement : MonoBehaviour
     private int _numberOfJumps;
     private bool _canJump;
     private bool _areMovementsDamped;
+
+    public Rigidbody2D Rb => _rb;
+
+    public BoxCollider2D BoxCollider => _boxCollider;
+
+    public CapsuleCollider2D CapsuleCollider => _capsuleCollider;
+
+    public Collider2D Collider => _collider;
     
-    
-    
-    
+    public float CoyoteTime => _coyoteTime;
+
+    public float JumpBuffer => _jumpBuffer;
+
+    public int NumberOfJumps => _numberOfJumps;
+
+    public bool AreMovementsDamped => _areMovementsDamped;
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -129,7 +142,7 @@ public class MainMovement : MonoBehaviour
         {
             _rb.velocity = new Vector2(_rb.velocity.x, jumpMoveRate);
             _coyoteTime = 0;
-            AudioManager.getInstance.PlayAudio(jumpSfx);
+            // AudioManager.getInstance.PlayAudio(jumpSfx);
             // _animator.SetBool("Has Jumped Once", true);
         }
 

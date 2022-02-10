@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 6869769172447801938}
   - component: {fileID: 6869769172447801966}
   - component: {fileID: 6869769172447801967}
-  - component: {fileID: 6869769172447801961}
   - component: {fileID: 1652390373}
+  - component: {fileID: 1802525871}
+  - component: {fileID: 1802525870}
   m_Layer: 0
   m_Name: MetalSlugHero
   m_TagString: Player
@@ -51,6 +52,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -142,21 +144,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.031036854, y: -0.09416783}
   m_Size: {x: 1.4654846, y: 2.1501489}
   m_Direction: 0
---- !u!114 &6869769172447801961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6869769172447801939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d9c1bac4feffae49a0a03790cbb1906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkingSpeed: 2.5
-  runningSpeed: 10
-  jumpForce: 6.5
 --- !u!114 &1652390373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,3 +158,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coins: 0
   coinSfx: {fileID: 8300000, guid: d0f31d0437baa42daba95665fb621379, type: 3}
+--- !u!61 &1802525871
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6869769172447801939}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.012690783, y: -1.083992}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.9, y: 2.66}
+    newSize: {x: 1.9, y: 2.66}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.1035838, y: 0.34145522}
+  m_EdgeRadius: 0
+--- !u!114 &1802525870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6869769172447801939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1a177c81779db4c86f3bcbc081afdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  trapLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  horizontalMoveRate: 2
+  jumpMoveRate: 5
+  deathHeight: -10
+  DEFAULT_coyoteTime: 0.1
+  DEFAULT_jumpBuffer: 0.1
+  hDampingBasic: 0.574
+  hDampingStop: 0.1
+  hDampingTurn: 0.1
+  jumpHDampingBasic: 0.1
+  jumpHDampingStop: 0.1
+  jumpHDampingTurn: 0.1
+  jumpCut: 1
+  freeFallForce: 2
+  jumpSfx: {fileID: 0}
