@@ -1,0 +1,17 @@
+3D Studio Max
+Maya
+ZBrush <Esculturas>
+Sculptor <Escultura>
+
+Blender - Gratuito e completo
+
+Wings3D - Gratuito e fácil
+	Wings 3D is an advanced subdivision modeler that is both powerful and easy to use.
+	Nao tem animação
+	Linguagem: Erlang
+	Winged Edge Data Structure (WEDS)
+	OpenSource
+
+SketchUp
+
+ProBuilder
