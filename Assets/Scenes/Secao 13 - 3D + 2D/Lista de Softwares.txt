@@ -1,9 +1,20 @@
+REFAZER AULA 167 com uma mesa digitalizadora
+
 3D Studio Max
 Maya
 ZBrush <Esculturas>
 Sculptor <Escultura>
 
 Blender - Gratuito e completo
+	OpenSource
+	Modelagem, escultura e UV
+	Python scripting
+	Tem supore â animação e rigging
+	Suporte à produção de VFX
+	desenho 2d em 3d
+	Usos comuns:
+		Escultura no ZBrush -> Retopologia no Blender
+	
 
 Wings3D - Gratuito e fácil
 	Wings 3D is an advanced subdivision modeler that is both powerful and easy to use.
@@ -12,6 +23,12 @@ Wings3D - Gratuito e fácil
 	Winged Edge Data Structure (WEDS)
 	OpenSource
 
-SketchUp
+SketchUp - Pago, muuito fácil e um pouco mais complet
+	Mais direcionado pra projetos arquitetônicos
+	Tem uma versão gratuita baseada em Web
+	Preparado para apresentações
+	Visualização em AR e VR
+	Armazenamento de projetos em nuvem
+	Pode ser estendido com Ruby e C
 
 ProBuilder
