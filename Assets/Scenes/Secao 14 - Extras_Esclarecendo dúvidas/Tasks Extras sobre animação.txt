@@ -1,0 +1,3 @@
+Fazer novo sistema de animação com mais 2 novos prefabs pro persoagem - Um pra 2D e outro pra 3D
+	Cada prefab contém um script diferente que lida com o mesmo animator.
+
