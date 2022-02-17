@@ -8,27 +8,27 @@ namespace Movement
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Collider2D))]
-    public class HeroMovement_William : MonoBehaviour
+    public class BaseHeroMovement : MonoBehaviour
     {
         [Header("Movement")]
-        [SerializeField] private float maxSpeed = 5f;
-        [SerializeField] private float jumpForce = 1000f;
+        [SerializeField] protected float maxSpeed = 5f;
+        [SerializeField] protected float jumpForce = 500f;
         
         [Header("UI")] 
-        [SerializeField] private Text txtMagnet;
+        [SerializeField] protected Text txtMagnet;
 
         [Header("Ground detection")] 
-        [SerializeField] private LayerMask oQueEChao;
-        [SerializeField] private Transform noChaoCheck;
-        [SerializeField] private float noChaoRaio = 0.2f;
+        [SerializeField] protected LayerMask oQueEChao;
+        [SerializeField] protected Transform noChaoCheck;
+        [SerializeField] protected float noChaoRaio = 2f;
 
-        private bool face = true;
-        private bool noChao;
-        private float move;
-        private int magnetItem = 0;
+        protected bool face = true;
+        protected bool noChao;
+        protected float move;
+        protected int magnetItem = 0;
 
-        private Animator anim;
-        private Rigidbody2D heroiRB;
+        protected Animator anim;
+        protected Rigidbody2D heroiRB;
 
 
         void Start()
