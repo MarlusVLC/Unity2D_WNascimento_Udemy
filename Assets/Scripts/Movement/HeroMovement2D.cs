@@ -8,37 +8,37 @@ namespace Movement
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Collider2D))]
-    public class HeroMovement2D : MonoBehaviour
+    public class HeroMovement2D : BaseHeroMovement
     {
-        [Header("Movement")]
-        [SerializeField] private float maxSpeed = 5f;
-        [SerializeField] private float jumpForce = 500f;
-        
-        [Header("UI")] 
-        [SerializeField] private Text txtMagnet;
-
-        [Header("Ground detection")] 
-        [SerializeField] private LayerMask oQueEChao;
-        [SerializeField] private Transform noChaoCheck;
-        [SerializeField] private float noChaoRaio = 2f;
-
-        private bool face = true;
-        private bool noChao;
-        private float move;
-        private int magnetItem = 0;
+        // [Header("Movement")]
+        // [SerializeField] private float maxSpeed = 5f;
+        // [SerializeField] private float jumpForce = 500f;
+        //
+        // [Header("UI")] 
+        // [SerializeField] private Text txtMagnet;
+        //
+        // [Header("Ground detection")] 
+        // [SerializeField] private LayerMask oQueEChao;
+        // [SerializeField] private Transform noChaoCheck;
+        // [SerializeField] private float noChaoRaio = 2f;
+        //
+        // private bool face = true;
+        // private bool noChao;
+        // private float move;
+        // private int magnetItem = 0;
         private bool isShooting;
 
-        private Animator anim;
-        private Rigidbody2D heroiRB;
+        // private Animator anim;
+        // private Rigidbody2D heroiRB;
 
 
-        void Start()
-        {
-            heroiRB = GetComponent<Rigidbody2D>();
-            anim = GetComponent<Animator>();
-        }
+        // void Start()
+        // {
+        //     heroiRB = GetComponent<Rigidbody2D>();
+        //     anim = GetComponent<Animator>();
+        // }
 
-        private void FixedUpdate()
+        protected override void FixedUpdate()
         {
             noChao = Physics2D.OverlapCircle(noChaoCheck.position, noChaoRaio, oQueEChao);
             

@@ -31,13 +31,13 @@ namespace Movement
         protected Rigidbody2D heroiRB;
 
 
-        void Start()
+        protected virtual void Start()
         {
             heroiRB = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
         }
 
-        private void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
             noChao = Physics2D.OverlapCircle(noChaoCheck.position, noChaoRaio, oQueEChao);
             

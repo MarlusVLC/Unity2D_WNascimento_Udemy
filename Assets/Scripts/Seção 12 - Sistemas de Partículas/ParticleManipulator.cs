@@ -13,6 +13,7 @@ namespace DefaultNamespace.Seção_12___Sistemas_de_Partículas
 
         private ParticleSystem.ExternalForcesModule _externalForces;
         private ParticleSystem.NoiseModule _noise;
+        private ParticleSystem.MainModule _main;
 
         #endregion
 

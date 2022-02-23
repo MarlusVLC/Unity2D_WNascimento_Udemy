@@ -10,6 +10,8 @@ namespace DefaultNamespace.Seção_12___Sistemas_de_Partículas
         
         void Start()
         {
+            
+            
             gradientColors = new []
             {
                 new GradientColorKey(Color.blue, 0.0f),

@@ -40,7 +40,6 @@ namespace Movement
 
         private void FixedUpdate()
         {
-            // noChao = Physics2D.OverlapCircle(noChaoCheck.position, noChaoRaio, oQueEChao);
             noChao = Physics.Raycast(noChaoCheck.position, Vector3.down, noChaoRaio, oQueEChao);
             
             //Idle
@@ -48,15 +47,13 @@ namespace Movement
             
             moveHorizontal = Input.GetAxis("Horizontal");
             moveVertical = Input.GetAxis("Vertical");
-            var movement = new Vector3(moveHorizontal, heroiRB.velocity.y, moveVertical);
+
+            var movement = new Vector3(moveHorizontal,0, moveVertical);
             movement = movement.normalized * maxSpeed;
-            heroiRB.velocity = movement;
+            heroiRB.velocity = new Vector3(movement.x, heroiRB.velocity.y, movement.z);
 
-            anim.SetFloat("uHorizontalSpeed", Mathf.Abs(movement.magnitude));
+            anim.SetFloat("uHorizontalSpeed", Mathf.Abs(movement.magnitude)/maxSpeed);
             anim.SetFloat("verticalAcceleration", heroiRB.velocity.y);
-
-
-            // heroiRB.velocity = new Vector2(move * maxSpeed, heroiRB.velocity.y);
             
             ///Tiro andando
             isShooting = Input.GetButton("Fire1");
@@ -75,8 +72,8 @@ namespace Movement
         private void Update()
         {
             if (noChao && Input.GetKeyDown(KeyCode.Space))
-            {
-                heroiRB.AddForce(new Vector2(0, jumpForce));
+            {   
+                heroiRB.AddForce(new Vector3(0, jumpForce,0));
             }
         }
 
