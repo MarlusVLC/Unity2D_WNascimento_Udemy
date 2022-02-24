@@ -7,9 +7,11 @@ public class CustomParticleCulling : MonoBehaviour
 {
     [SerializeField] private float cullingRadius = 10;
     [SerializeField] private ParticleSystem target;
+    [SerializeField] private bool stopRenderOnCull = false;
 
     private CullingGroup _cullingGroup;
     private Renderer[] _particleRenderers;
+    private ParticleSystem.LightsModule _lights;
 
     void OnEnable()
     {
@@ -26,12 +28,17 @@ public class CustomParticleCulling : MonoBehaviour
             _cullingGroup.SetBoundingSphereCount(1);
             _cullingGroup.onStateChanged += OnStateChanged;
             
+            _cullingGroup.SetDistanceReferencePoint(_cullingGroup.targetCamera.transform);
+            _cullingGroup.SetBoundingDistances(new float[] {10,20,30});
+            
             //É preciso iniciar em estado ocultado
             Cull(_cullingGroup.IsVisible(0));
             
         }
 
         _cullingGroup.enabled = true;
+
+        _lights = target.lights;
     }
 
     private void OnDisable()
@@ -62,6 +69,9 @@ public class CustomParticleCulling : MonoBehaviour
     private void OnStateChanged(CullingGroupEvent sphere)
     {
         Debug.Log(sphere.currentDistance.ToString());
+
+        _lights.intensityMultiplier -= sphere.currentDistance - sphere.previousDistance; 
+        
         Cull(sphere.isVisible);
     }
 
@@ -70,13 +80,14 @@ public class CustomParticleCulling : MonoBehaviour
         if (visible)
         {
             //Poderiamos simular um pouquinho pra frente aqui para esconder que o sistema não foi atualizado fora da tela
+            target.Simulate(1.0f);
             target.Play(true);
             SetRenderers(true);
         }
         else
         {
             target.Pause(true);
-            SetRenderers(true);
+            SetRenderers(!stopRenderOnCull);
         }
     }
 
